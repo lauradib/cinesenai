@@ -41,13 +41,49 @@ function mostrarHorarios(filmeId) {
 }
 
 // Função para selecionar a poltrona em uma sessão específica do filme
+// Função para selecionar/desselecionar poltronas
 function selecionarPoltrona(filmeId, sessao) {
-    const modal = document.getElementById('modalPoltronas');
-    modal.style.display = 'block'; // Mostrar o modal
+    // Recuperar todas as poltronas disponíveis
+    const poltronas = document.querySelectorAll('.poltrona');
 
-    // Atualizar informações da poltrona selecionada na sua lógica
-    // Por exemplo, usar o filmeId e a sessao para identificar a sessão selecionada
+    // Adicionar evento de clique a cada poltrona
+    poltronas.forEach(poltrona => {
+        poltrona.addEventListener('click', () => {
+            // Alternar o estado de seleção da poltrona
+            if (poltrona.classList.contains('selecionada')) {
+                // Se já estiver selecionada, desselecione-a
+                poltrona.classList.remove('selecionada');
+                poltrona.style.backgroundColor = ''; // Restaurar cor de fundo original
+            } else {
+                // Se não estiver selecionada, adicione a classe de seleção
+                poltrona.classList.add('selecionada');
+                poltrona.style.backgroundColor = 'green'; // Alterar a cor de fundo para verde
+            }
+
+            // Recalcular e exibir o total da compra
+            calcularTotalCompra();
+        });
+    });
+
+    // Exibir o modal ao clicar no botão "Ver opções"
+    const modal = document.getElementById('modalPoltronas');
+    modal.style.display = 'block';
 }
+
+// Função para calcular o total da compra com base nas poltronas selecionadas
+function calcularTotalCompra() {
+    const poltronasSelecionadas = document.querySelectorAll('.poltrona.selecionada');
+    const precoPorPoltrona = 10; // Preço por poltrona selecionada
+
+    // Calcular o total com base no número de poltronas selecionadas
+    const totalCompra = poltronasSelecionadas.length * precoPorPoltrona;
+
+    // Atualizar o elemento que exibe o total da compra
+    const totalElement = document.getElementById('totalCompra');
+    totalElement.textContent = `Total da Compra: R$ ${totalCompra}`;
+}
+
+
 
 // Função para fechar o modal
 function fecharModal() {
@@ -55,6 +91,57 @@ function fecharModal() {
     modal.style.display = 'none'; // Esconder o modal ao fechar
 }
 
+function selecionarPoltrona(filmeId, sessao) {
+    const poltronaSelecionada = `${filmeId}-${sessao}`; // Cria um identificador único para a poltrona
+
+    // Verifica se a poltrona já está selecionada
+    const index = poltronasSelecionadas.indexOf(poltronaSelecionada);
+    if (index === -1) {
+        // Se não estiver selecionada, adiciona à lista de poltronas selecionadas
+        poltronasSelecionadas.push(poltronaSelecionada);
+
+        // Altera o estilo da poltrona selecionada (exemplo: altera cor de fundo)
+        const poltronaElement = document.getElementById(poltronaSelecionada);
+        poltronaElement.style.backgroundColor = 'green'; // Altera a cor de fundo para indicar seleção
+
+        // Exibe o modal de adicionar ao carrinho ao selecionar a primeira poltrona
+        const modal = document.getElementById('modalPoltronas');
+        modal.style.display = 'block';
+    } else {
+        // Se já estiver selecionada, remove da lista de poltronas selecionadas
+        poltronasSelecionadas.splice(index, 1);
+
+        // Restaura o estilo da poltrona (exemplo: restaura cor de fundo original)
+        const poltronaElement = document.getElementById(poltronaSelecionada);
+        poltronaElement.style.backgroundColor = ''; // Restaura a cor de fundo original
+    }
+}
+
+function adicionarAoCarrinho() {
+    const valorPorPoltrona = 10; // Valor por cada poltrona selecionada (exemplo: R$10)
+
+    // Seleciona todas as poltronas marcadas como selecionadas
+    const poltronasSelecionadas = document.querySelectorAll('.poltrona.selecionada');
+
+    // Calcula o total com base no número de poltronas selecionadas
+    const total = poltronasSelecionadas.length * valorPorPoltrona;
+
+    // Exibe o total da compra no modal
+    const modalContent = document.querySelector('.modal-content');
+    const totalCompraElement = document.getElementById('totalCompra');
+
+    if (totalCompraElement) {
+        // Limpa o conteúdo anterior e adiciona o novo valor
+        totalCompraElement.innerHTML = ''; // Limpa o conteúdo existente
+        totalCompraElement.textContent = `Total da Compra: R$${total}`; // Adiciona o total da compra
+    } else {
+        // Se o elemento não existe, cria e adiciona
+        const newTotalElement = document.createElement('div');
+        newTotalElement.id = 'totalCompra';
+        newTotalElement.textContent = `Total da Compra: R$${total}`;
+        modalContent.appendChild(newTotalElement); // Adiciona ao conteúdo do modal
+    }
+}
 
 
 // Selecionar todos os botões "Ver seção" e adicionar evento de clique

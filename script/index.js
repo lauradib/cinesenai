@@ -10,7 +10,8 @@ switchElement.addEventListener('change', () => {
     if (switchElement.checked) {
         // Mudar o tema para azul claro
         body.style.backgroundColor = '#93A6E0'; 
-        header.style.backgroundColor = '#4682b4';   
+        header.style.backgroundColor = '#4682b4';
+        footer.style.backgroundColor = '#4682b4';   
         logoImage.src = 'image/cor modo claro.png'; 
     } else {
         // Mudar de volta para o tema original

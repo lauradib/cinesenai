@@ -125,3 +125,20 @@ header nav {
     text-decoration: none;
     cursor: pointer;
 }
+
+.card{
+    background-color: transparent;
+    color: white;
+    
+}
+
+#cancelar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+element.style {
+    text-decoration: none;
+}

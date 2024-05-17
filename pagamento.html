@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/pagamento.css">
+    <link rel="shortcut icon" href="image/logofavicon.png" type="image/x-icon">
+    <title>Pagamento</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="payment-form">
+            <h2>Pagamento</h2>
+            <form>
+                <div class="form-group">
+                    <label for="nome">Nome no Cartão</label>
+                    <input type="text" class="form-control" id="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="numeroCartao">Número do Cartão</label>
+                    <input type="text" class="form-control" id="numeroCartao" required>
+                </div>
+                <div class="form-group">
+                    <label for="validade">Validade</label>
+                    <input type="text" class="form-control" id="validade" placeholder="MM/AA" required>
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" class="form-control" id="cvv" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Confirmar Pagamento</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script/bootstrap.bundle.min.js"></script>
+    <script src="script/index.js"></script>
+</body>
+</html>

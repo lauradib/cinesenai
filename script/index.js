@@ -144,3 +144,26 @@ btnFecharModal.addEventListener('click', () => {
     modal.style.display = 'none'; 
 });
 
+
+function mostrarHorarios(filmeId) {
+    document.getElementById('horarios-' + filmeId).style.display = 'block';
+  }
+
+  function selecionarPoltrona(filmeId, sessaoId) {
+    document.getElementById('modalPoltronas').style.display = 'block';
+  }
+
+
+  function finalizarCompra() {
+    window.location.href = "pagamento.html";
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.btn-fechar-modal').addEventListener('click', function() {
+      document.getElementById('modalPoltronas').style.display = 'none';
+    });
+  });
+
+  document.getElementById('finalizarCompraBtn').addEventListener('click', function() {
+    window.location.href = 'pagamento.html';
+});
